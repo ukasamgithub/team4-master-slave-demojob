@@ -15,20 +15,22 @@ pipeline{
           }
         }
         stage('sub-job2'){
-          steps{
+            agent{
+                label 'slave2' 
+            }
+        steps{
             echo 'action2'
           }
         }
         stage('sub-job3'){
             steps{
-                echo 'action3'
+                sh 'whoami'
             }
         }
       }
     }
     stage('codebuild'){
       agent {
-        label {
           label 'slave3'
         }
       }
