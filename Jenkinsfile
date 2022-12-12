@@ -1,7 +1,7 @@
 pipeline{
-  agent any
-      label 'slave1'
-    }
+  agent{
+    label 'slave1'
+  }
   stages{
     stage('version-control'){
       steps{
@@ -47,3 +47,4 @@ pipeline{
         sh 'logname'
       }
     }
+}    
