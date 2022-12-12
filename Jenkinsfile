@@ -47,4 +47,3 @@ pipeline{
         sh 'logname'
       }
     }
-  }
