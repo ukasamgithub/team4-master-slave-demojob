@@ -9,7 +9,7 @@ pipeline{
         checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'slave-id', url: 'https://github.com/ukasamgithub/team4-master-slave-demojob.git']]])
       }
     }
-    sage('parallel-job'){
+    stage('parallel-job'){
       parallel{
         stage('sub-job1'){
           steps{
