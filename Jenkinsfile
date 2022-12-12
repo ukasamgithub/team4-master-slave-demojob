@@ -1,13 +1,15 @@
 pipeline{
-  agent {
-  }
+  agent any
+    label {
+      label 'slave1'
+    }
   stages{
     stage('version-control'){
       steps{
         checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'slave-id', url: 'https://github.com/ukasamgithub/team4-master-slave-demojob.git']]])
       }
     }
-    stage('parallel-job'){
+    sage('parallel-job'){
       parallel{
         stage('sub-job1'){
           steps{
@@ -15,10 +17,10 @@ pipeline{
           }
         }
         stage('sub-job2'){
-            agent{
-                label 'slave2' 
-            }
-        steps{
+          agent{
+            label 'slave2'
+          }
+          steps{
             echo 'action2'
           }
         }
@@ -37,22 +39,13 @@ pipeline{
       steps{
         sh 'cat /etc/passwd'
       }
-      stage('file creation'){
-        agent{
-          label 'slave1'
-        }
-        staeps{
-          sh 'touch gropu5.txt'
-        }
+    }
+    stage('file creation'){
+      agent{
+        label 'slave1'
       }
-      stage('identification'){
-        agent{
-          label 'slave2'
-        }
-        steps{
-          sh 'logname'
-        }
+      steps{
+        sh 'logname'
       }
     }
   }
-
